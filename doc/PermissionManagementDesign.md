@@ -15,9 +15,11 @@
 ![permissionModel3](https://raw.github.com/pi-asset/image/master/permission/permissionModel3.jpg)
 
 ## Permission Management Design
-权限管理分为两部分，对角色、用户的管理在operation->system下进行，对权限的管理在setting->permission中。
+权限管理分为对角色、角色权限、用户角色的管理。角色属于各个网站，由各个网站分别管理。<br>
+对角色的管理在operation->system->Role下进行，对用户角色的分配在operationg->user/user client下进行，对权限的管理在setting->permission中。
 
 ### Permission Management
+对权限的管理在setting->permission中进行，每个模块分别管理自己的权限。<br>
 权限按照模块划分，模块内分前后台权限。
 
 前台：<br>
@@ -31,16 +33,27 @@
 可批量分配权限。
 
 ### Role Management
+角色管理在operation->system->Role下进行。<br>
+系统默认有前台角色：Guest、Member、Webmaster，以及后台角色Administrator，这些默认角色都不能删除或禁用。其中Guest角色不允许添加或删除用户，所有用户都不属于这个角色，该角色用于定义非站点会员的权限
+；Member为所有注册用户默认具有的角色，不能把用户从该组中移除；WebMaster和Administrator分别为前后台管理员。<br>
 角色分前台角色和后台角色，一个用户可以具有多个角色，角色之间没有继承关系。<br>
 功能
 - 添加角色 添加前台、后台角色
 - 删除角色 只能删除用户创建的角色，系统自带角色不能删除或修改，只能编辑其权限
 - 修改角色的title
-- 修改角色权限 跳转到权限管理页面
-- 添加/删除角色内的用户
-
-每个用户创建时都会自动分配前台角色member，不能删除该角色
 
 ### User Management
-包括基本信息查看、添加、修改、删除、过滤用户功能。<br>
-添加、修改单个用户信息时可以编辑用户具有的角色信息，默认分配的member角色不能删除。不提供批量操作。
+用户角色管理是由各个网站分别控制的，在operationg->user/user client下进行。<br>
+**注意：每个站点创建的角色只在该站点内有效**<br>
+
+**User**<br>
+功能
+- 基本信息查看
+- 过滤用户
+- 批量赋予、取消角色
+
+**Role**<br>
+功能
+- 查看站点内角色
+- 根据ID/Username/Displayname/Email往角色内添加用户
+- 从角色内移除用户
